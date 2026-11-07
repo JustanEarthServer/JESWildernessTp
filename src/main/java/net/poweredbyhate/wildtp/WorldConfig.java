@@ -20,7 +20,7 @@ import net.poweredbyhate.wildtp.TeleportGoneWild.Trigger;
  * Created by arboriginal on 7/10/2019.
  */
 class WorldConfig {
-    private int minXY, maxXY;
+    private int minXY, maxXY, minXb, maxXb, minZb, maxZb;
 
     boolean bar_enabled, doCommandz, dr0p1n, freeze, freezePortal, moveCancel, moveCancelPortal,
             bypass_cooldown_cmd,
@@ -98,6 +98,10 @@ class WorldConfig {
         if (bar_enabled) paulDance(s, c);
         maxXY = i("MaxXY", s, c);
         minXY = i("MinXY", s, c);
+        minXb = has("MinX", s, c) ? i("MinX", s, c) : minXY;
+        maxXb = has("MaxX", s, c) ? i("MaxX", s, c) : maxXY;
+        minZb = has("MinZ", s, c) ? i("MinZ", s, c) : minXY;
+        maxZb = has("MaxZ", s, c) ? i("MaxZ", s, c) : maxXY;
         weNeedToBuildaWallTrumpSaidItAndObviouslyEverybodyLikeHim();
     }
 
@@ -121,7 +125,10 @@ class WorldConfig {
         }
         WildTP.debug("WorldBorder plugin not detected (or border not set), checking for vanilla's");
         WorldBorder b = world.getWorldBorder();
-        if (b == null) return;
+        if (b == null) {
+            sendBrick(minXY, maxXY, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            return;
+        }
         int r = (int) b.getSize() / 2, x = b.getCenter().getBlockX(), z = b.getCenter().getBlockZ();
         sendBrick(minXY, maxXY, x - r, x + r, z - r, z + r);
     }
@@ -138,6 +145,10 @@ class WorldConfig {
 
     private HashSet<String> h(String k, ConfigurationSection v, ConfigurationSection d) {
         return new HashSet<String>((v != null && v.contains(k)) ? v.getStringList(k) : d.getStringList(k));
+    }
+
+    private boolean has(String k, ConfigurationSection v, ConfigurationSection d) {
+        return (v != null && v.contains(k)) || d.contains(k, true);
     }
 
     private int i(String k, ConfigurationSection v, ConfigurationSection d) {
@@ -187,10 +198,10 @@ class WorldConfig {
     }
 
     private void sendBrick(int minXY, int maxXY, int x, int X, int z, int Z) {
-        minX = Math.max(x, minXY);
-        maxX = Math.min(X, maxXY);
-        minZ = Math.max(z, minXY);
-        maxZ = Math.min(Z, maxXY);
+        minX = Math.max(x, minXb);
+        maxX = Math.min(X, maxXb);
+        minZ = Math.max(z, minZb);
+        maxZ = Math.min(Z, maxZb);
 
         WildTP.debug(world.getName() + " borders: " + minX + ";" + maxX + ":" + minZ + ";" + maxZ);
     }
