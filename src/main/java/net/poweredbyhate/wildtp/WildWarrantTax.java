@@ -104,7 +104,8 @@ public class WildWarrantTax
         WildTP.debug("biome: " + loco.getBlock().getBiome());
 
         //https://github.com/AcmeProject/WildernessTp/issues/93#issuecomment-757527909
-        if (loco.getBlock().getBiome() != null && wc.bioman.contains(loco.getBlock().getBiome().toString()))
+        org.bukkit.block.Biome biome = loco.getBlock().getBiome();
+        if (biome != null && wc.bioman.contains(biome.getKey().getKey().toUpperCase(java.util.Locale.ROOT)))
             return null;
 
         WildTP.debug("Biome not banned, now set y (also checks if this is a vanilla (or doubleheight) nether."); //Will need to update for 1.17

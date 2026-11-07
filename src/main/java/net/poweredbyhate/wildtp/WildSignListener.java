@@ -73,7 +73,7 @@ public class WildSignListener implements Listener {
             ev.setCancelled(true);
 
             WildTP.debug(john.getName() + " tried to create a WildTP sign in the wrong place!");
-            john.sendMessage(TooWildForEnums.NO_BIOME.replace("%BIOME%", bily.getKey().getKey()));
+            john.sendMessage(TooWildForEnums.NO_BIOME.replace("%BIOME%", bily.getKey().getKey().toUpperCase(java.util.Locale.ROOT)));
             return;
         }
 
