@@ -1,6 +1,5 @@
 package net.poweredbyhate.wildtp;
 
-import io.papermc.lib.PaperLib;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -66,7 +65,7 @@ public class WildWarrantTax
         WildTP.debug("started search with " + l0c0);
         WildTP.debug("primary thread? " + Bukkit.isPrimaryThread());
 
-        return PaperLib.getChunkAtAsync(l0c0, true).thenApply(chunk ->
+        return wc.world.getChunkAtAsync(l0c0, true).thenApply(chunk ->
         {
             randomLocation = chekar(l0c0);
             if (randomLocation != null)
@@ -143,7 +142,7 @@ public class WildWarrantTax
         if ((useExperimentalChekar || useOtherChekar) && player != null) {
             try {
                 BlurredBlockBreakEvent iHopePluginsDontFreakOutOverThis
-                        = new BlurredBlockBreakEvent(l0c0.getBlock(), new JohnBonifield(player));
+                        = new BlurredBlockBreakEvent(l0c0.getBlock(), JohnBonifield.of(player));
                 CodeACertainBallWillStealEvent theQueueBall
                         = new CodeACertainBallWillStealEvent(l0c0.clone().add(0, 1, 0), player);
                 player.setMetadata("nocheat.exempt", new FixedMetadataValue(instace, true));

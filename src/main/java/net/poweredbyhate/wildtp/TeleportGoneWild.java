@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import io.papermc.lib.PaperLib;
 import net.md_5.bungee.api.ChatMessageType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -302,7 +301,7 @@ public class TeleportGoneWild {
     }
 
     private void goWild(Location loc) {
-        PaperLib.getChunkAtAsync(loc, true).thenAccept(chunk ->
+        loc.getWorld().getChunkAtAsync(loc, true).thenAccept(chunk ->
         {
             if (!TooCool2Teleport.microwave(who))
             {

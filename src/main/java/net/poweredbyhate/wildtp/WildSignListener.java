@@ -67,13 +67,13 @@ public class WildSignListener implements Listener {
 
         Player john = ev.getPlayer();
         Biome  bily = john.getLocation().getBlock().getBiome();
-
-        if (bily == Biome.NETHER || bily == Biome.THE_END) {
+        World.Environment env = john.getWorld().getEnvironment();
+        if (env == World.Environment.NETHER || env == World.Environment.THE_END) {
             ev.getBlock().breakNaturally();
             ev.setCancelled(true);
 
             WildTP.debug(john.getName() + " tried to create a WildTP sign in the wrong place!");
-            john.sendMessage(TooWildForEnums.NO_BIOME.replace("%BIOME%", bily.toString()));
+            john.sendMessage(TooWildForEnums.NO_BIOME.replace("%BIOME%", bily.getKey().getKey()));
             return;
         }
 

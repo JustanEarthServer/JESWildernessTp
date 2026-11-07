@@ -3,7 +3,7 @@ package net.poweredbyhate.wildtp;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;

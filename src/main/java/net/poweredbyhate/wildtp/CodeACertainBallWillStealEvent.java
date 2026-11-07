@@ -20,7 +20,7 @@ public class CodeACertainBallWillStealEvent extends BlockPlaceEvent
     private boolean qballNoSwiping;
     public CodeACertainBallWillStealEvent(Location page, Player player)
     {
-        super(page.getBlock(), page.getBlock().getState(), page.getBlock().getRelative(BlockFace.DOWN), new ItemStack(Material.AIR), new JohnBonifield(player), false, EquipmentSlot.OFF_HAND);
+        super(page.getBlock(), page.getBlock().getState(), page.getBlock().getRelative(BlockFace.DOWN), new ItemStack(Material.AIR), JohnBonifield.of(player), false, EquipmentSlot.OFF_HAND);
     }
 
     public void setExposed(boolean exposed)
